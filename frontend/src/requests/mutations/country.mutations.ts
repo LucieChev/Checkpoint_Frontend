@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const ADDCOUNTRY = gql`
-  mutation AddCountry($data: NewCountryInput!) {
-    addcountry(data: $data) {
+  mutation addCountry($data: NewCountryInput!) {
+    addCountry(data: $data) {
       id
       code
       name

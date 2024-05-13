@@ -1,57 +1,71 @@
-// import * as React from "react";
-// import { useMutation } from "@apollo/client";
-// import {NewCountryInput} from "@/types"
-// export function AddCountry() {
-//   const [addCountry] = useMutation(addCountry);
-//   const [formData, setFormData] = React.useState({
-//     name: "",
-//     emoji: "",
-//     code: "",
-//   }); // Fonction pour gérer les changements dans les champs du formulaire
-//   const handleInputChange = (event: { target: { name: any; value: any } }) => {
-//     const { name, value } = event.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
+import * as React from "react";
+import { useMutation } from "@apollo/client";
+import { ADDCOUNTRY } from "@/requests/mutations/country.mutations";
+import { NewCountryInput } from "@/types";
+import { COUNTRIES } from "@/requests/queries/country.queries";
 
-//   // Fonction pour gérer la soumission du formulaire
-//   const handleSubmit = async (event: { preventDefault: () => void }) => {
-//     event.preventDefault();
+export function AddCountry() {
+  const [addCountry] = useMutation(ADDCOUNTRY, {
+    refetchQueries: [{ query: COUNTRIES }],
+  });
+  const [formData, setFormData] = React.useState<NewCountryInput>({
+    name: "",
+    emoji: "",
+    code: "",
+  });
 
-//     // Appelez la fonction d'ajout de pays avec les données du formulaire
-//     try {
-//       await addCountry({
-//         variables: {
-//           data: formData,
-//         },
-//       });
-//       // Réinitialisez les champs du formulaire après l'ajout réussi
-//       setFormData({ name: "", emoji: "", code: "" });
-//       alert("Country added successfully!");
-//     } catch (error) {
-//       // Gérez les erreurs d'ajout de pays ici
-//       console.error("Error adding country:", error);
-//       alert("An error occurred while adding the country. Please try again.");
-//     }
-//   };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <label htmlFor="countryName">Name:</label>
-//         <input
-//           id="countryName"
-//           name="name"
-//           type="text"
-//           value={formData.name}
-//           onChange={handleInputChange}
-//           required
-//         />
-//         <label htmlFor="emoji">Emoji:</label>
-//         <input></input>
-//         <label htmlFor="code">Code:</label>
-//         <input></input>
-//         <button type="submit">Add</button>
-//       </form>
-//     </div>
-//   );
-// }
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      await addCountry({
+        variables: {
+          data: formData,
+        },
+      });
+      setFormData({ name: "", emoji: "", code: "" });
+    } catch (error) {
+      console.error("Error adding country:", error);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="countryName">Name:</label>
+        <input
+          id="countryName"
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleInputChange}
+          required
+        />
+        <label htmlFor="emoji">Emoji:</label>
+        <input
+          id="emoji"
+          name="emoji"
+          type="text"
+          value={formData.emoji}
+          onChange={handleInputChange}
+          required
+        />
+        <label htmlFor="code">Code:</label>
+        <input
+          id="code"
+          name="code"
+          type="text"
+          value={formData.code}
+          onChange={handleInputChange}
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  );
+}
