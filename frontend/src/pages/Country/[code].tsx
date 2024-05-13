@@ -1,11 +1,12 @@
 import React from "react";
+import styles from "../Countries.module.css";
 
 interface CountryDetailsProps {
   country: {
     id: string;
     name: string;
     code: string;
-    continent: {
+    continent?: {
       id: string;
       name: string;
     };
@@ -14,10 +15,23 @@ interface CountryDetailsProps {
 
 const CountryDetails: React.FC<CountryDetailsProps> = ({ country }) => {
   return (
-    <div>
-      <h2>{country.name}</h2>
-      <h2>{country.code}</h2>
-      <h2>{country.continent.name}</h2>
+    <div className={styles.countryDetailsContainer}>
+      <div className={styles.countryDetailsCard}>
+        <div className={styles.countryDetail}>
+          <span className={styles.countryDetailLabel}>Name:</span>{" "}
+          {country.name}
+        </div>
+        <div className={styles.countryDetail}>
+          <span className={styles.countryDetailLabel}>Code:</span>{" "}
+          {country.code}
+        </div>
+        {country.continent && (
+          <div className={styles.countryDetail}>
+            <span className={styles.countryDetailLabel}>Continent:</span>{" "}
+            {country.continent.name}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

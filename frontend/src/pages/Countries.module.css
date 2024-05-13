@@ -1,0 +1,52 @@
+.countryList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .countryCard {
+    width: 200px;
+    height: 150px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .countryCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .countryName {
+    font-weight: bold;
+  }
+  
+  .countryEmoji {
+    font-size: 24px;
+  }
+  
+  .countryDetailsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .countryDetailsCard {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .countryDetail {
+    margin-bottom: 10px;
+  }
+  
+  .countryDetailLabel {
+    font-weight: bold;
+  }
+  
