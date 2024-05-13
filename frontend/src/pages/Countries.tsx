@@ -1,19 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { COUNTRIES } from "@/requests/queries/country.queries";
 import CountryDetails from "@/pages/Country/[code]"; // Importez le composant CountryDetails
 
 interface Country {
-  id: string; 
+  id: string;
   name: string;
-
 }
 
 export default function Countries() {
   const { loading, error, data } = useQuery(COUNTRIES);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
-  console.log({ loading, error, data });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error </p>;
 
