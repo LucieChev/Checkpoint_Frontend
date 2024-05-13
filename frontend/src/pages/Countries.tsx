@@ -23,7 +23,6 @@ export default function Countries() {
 
   return (
     <div>
-      <h1>List of Countries</h1>
       <div className={styles.countryList}>
         {data.countries.map((country: Country) => (
           <div

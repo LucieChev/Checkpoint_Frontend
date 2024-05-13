@@ -1,4 +1,4 @@
-import { AddCountry } from "@/components/AddCountry";
+import  AddCountry  from "@/pages/AddCountry";
 import Header from "@/components/Header";
 import Countries from "@/pages/Countries";
 

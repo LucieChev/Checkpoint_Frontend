@@ -3,7 +3,11 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+  .title{
+    display: flex;
+    justify-content: center;
+    color: white;
+  }
   .countryCard {
     width: 200px;
     height: 150px;

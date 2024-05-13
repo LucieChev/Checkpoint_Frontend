@@ -1,10 +1,11 @@
-import * as React from "react";
+import React from "react";
 import { useMutation } from "@apollo/client";
 import { ADDCOUNTRY } from "@/requests/mutations/country.mutations";
 import { NewCountryInput } from "@/types";
 import { COUNTRIES } from "@/requests/queries/country.queries";
+import styles from "./AddCountry.module.css";
 
-export function AddCountry() {
+const AddCountry = () => {
   const [addCountry] = useMutation(ADDCOUNTRY, {
     refetchQueries: [{ query: COUNTRIES }],
   });
@@ -35,8 +36,8 @@ export function AddCountry() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="countryName">Name:</label>
         <input
           id="countryName"
@@ -45,6 +46,7 @@ export function AddCountry() {
           value={formData.name}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
         <label htmlFor="emoji">Emoji:</label>
         <input
@@ -54,6 +56,7 @@ export function AddCountry() {
           value={formData.emoji}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
         <label htmlFor="code">Code:</label>
         <input
@@ -63,9 +66,14 @@ export function AddCountry() {
           value={formData.code}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.button}>
+          Add
+        </button>
       </form>
     </div>
   );
-}
+};
+
+export default AddCountry;
